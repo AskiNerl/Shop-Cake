@@ -6,6 +6,16 @@ const brandName = 'Солодка естетика вашого свята'
 const priceNote = 'від 1000 грн/кг'
 const minimumOrder = 'мінімальне замовлення від 2 кг'
 
+const telegramUsername = 'Natalka_zt' 
+
+
+const customTelegramLink = `https://t.me/${telegramUsername}`
+
+
+function telegramHref(message) {
+  return `https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`
+}
+
 const products = [
   {
     id: 'strawberry-cream',
@@ -157,12 +167,7 @@ function getProduct(id) {
   return products.find((product) => product.id === id) ?? products[0]
 }
 
-function telegramHref(message) {
- 
-  const telegramUsername = 'твой_ник_в_телеграм' 
-  
-  return `https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`
-}
+
 
 function productMessage(product) {
   return [
