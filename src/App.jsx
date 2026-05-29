@@ -158,13 +158,10 @@ function getProduct(id) {
 }
 
 function telegramHref(message) {
-  const pageUrl = typeof window === 'undefined' ? '' : window.location.href
-  const params = new URLSearchParams({
-    url: pageUrl,
-    text: message,
-  })
-
-  return `https://t.me/share/url?${params.toString()}`
+ 
+  const telegramUsername = 'твой_ник_в_телеграм' 
+  
+  return `https://t.me/${telegramUsername}?text=${encodeURIComponent(message)}`
 }
 
 function productMessage(product) {
