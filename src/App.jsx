@@ -32,7 +32,7 @@ const products = [
   {
     id: 'kids-cat',
     title: 'Дитячий торт з декором',
-    categories: ['Дитячі'], 
+    categories: ['Дитячі','Розрізи'], 
     image: 'cakes/kids-cat-cake.jpg',
     alt: 'Рожевий дитячий торт з котиком, метеликами та кульками',
     price: priceNote,
@@ -80,7 +80,7 @@ const products = [
   {
     id: 'cheesecake',
     title: 'Чізкейк з грушею та фісташками',
-    categories: ['Десерти'], 
+    categories: ['Десерти', 'Розрізи'], 
     image: 'cakes/pineapple-cake-slice.jpg',
     alt: 'Шматок чізкейку з грушею, фісташками та золотим декором',
     price: priceNote,
@@ -130,7 +130,7 @@ const gallery = [
   {
     src: 'cakes/photo_7_2026-05-29_17-28-27.jpg',
     label: 'Деталізований торт ',
-    type: 'Дитячі',
+    type: 'Святкові',
   },
 ]
 
