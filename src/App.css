@@ -1123,3 +1123,9 @@
     grid-template-columns: 1fr;
   }
 }
+.trust-media img:last-child {
+  grid-column: 1 / -1; 
+  aspect-ratio: auto; 
+  object-fit: contain; 
+  width: 100%;
+}

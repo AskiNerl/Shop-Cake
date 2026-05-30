@@ -20,8 +20,8 @@ const products = [
   {
     id: 'strawberry-cream',
     title: 'Полуничний кремовий торт',
-    category: 'Святкові',
-    image: 'src//asset//photo_23_2026-05-29_17-28-27.jpg',
+    categories: ['Святкові'], 
+    image: 'cakes/cheesecake-pear.jpg',
     alt: 'Світлий торт з полуницею, мʼятою та золотим топером',
     price: priceNote,
     weight: 'від 2 кг',
@@ -32,8 +32,8 @@ const products = [
   {
     id: 'kids-cat',
     title: 'Дитячий торт з декором',
-    category: 'Дитячі',
-    image: '/cakes/kids-cat-cake.jpg',
+    categories: ['Дитячі'], 
+    image: 'cakes/kids-cat-cake.jpg',
     alt: 'Рожевий дитячий торт з котиком, метеликами та кульками',
     price: priceNote,
     weight: 'від 2 кг',
@@ -44,8 +44,8 @@ const products = [
   {
     id: 'rose-lace',
     title: 'Ніжний торт з трояндами',
-    category: 'Святкові',
-    image: '/cakes/rose-lace-cake.jpg',
+    categories: ['Святкові'], 
+    image: 'cakes/rose-lace-cake.jpg',
     alt: 'Білий торт з рожевим мереживом, трояндами та топером',
     price: priceNote,
     weight: 'від 2 кг',
@@ -56,8 +56,8 @@ const products = [
   {
     id: 'money-theme',
     title: 'Тематичний торт',
-    category: 'Святкові',
-    image: '/cakes/money-theme-cake.jpg',
+    categories: ['Святкові'], 
+    image: 'cakes/money-theme-cake.jpg',
     alt: 'Торт з декором у стилі доларів, бантом і персональним топером',
     price: priceNote,
     weight: 'від 2 кг',
@@ -68,8 +68,8 @@ const products = [
   {
     id: 'tiramisu',
     title: 'Тірамісу у боксі',
-    category: 'Десерти',
-    image: '/cakes/social-theme-cake.jpg',
+    categories: ['Десерти', 'Розрізи'], 
+    image: 'cakes/social-theme-cake.jpg',
     alt: 'Порційні бокси тірамісу з какао та кавовими зернами',
     price: priceNote,
     weight: 'від 2 кг',
@@ -80,8 +80,8 @@ const products = [
   {
     id: 'cheesecake',
     title: 'Чізкейк з грушею та фісташками',
-    category: 'Десерти',
-    image: '/asset/photo_9_2026-05-29_17-28-27.jpg',
+    categories: ['Десерти'], 
+    image: 'cakes/pineapple-cake-slice.jpg',
     alt: 'Шматок чізкейку з грушею, фісташками та золотим декором',
     price: priceNote,
     weight: 'від 2 кг',
@@ -93,46 +93,61 @@ const products = [
 
 const gallery = [
   {
-    src: '/cakes/certificate-biscuit-cakes.jpg',
+    src: 'cakes/certificate-biscuit-cakes.jpg',
     label: 'Лавандовий торт',
     type: 'Святкові',
   },
   {
-    src: '/cakes/women-birthday-cake.jpg',
+    src: 'cakes/women-birthday-cake.jpg',
     label: 'Білий торт зі стрічками',
     type: 'Святкові',
   },
   {
-    src: 'srcssetphoto_12_2026-05-29_17-28-27.jpg', 
+    src: 'cakes/kids-cat-slice.jpg', 
     label: 'Олигарх',
     type: 'Святкові',
   },
   {
-    src: '/cakes/blue-bear-cake.jpg',
+    src: 'cakes/blue-bear-cake.jpg',
     label: 'Торт з ведмедиком',
     type: 'Дитячі',
   },
   {
-    src: 'srcassetphoto_2026-05-29_19-01-01.jpg',
+    src: 'cakes/heart-corset-cake.jpg',
     label: 'Полуничний десерт',
     type: 'Десерти',
   },
   {
-    src: 'srcassetphoto_2026-05-29_18-41-55.jpg',
+    src: 'cakes/photo_8_2026-05-29_17-28-27.jpg',
     label: 'Мусовий торт',
     type: 'Десерти',
   },
   {
-    src: '/cakes/blue-bear-cake.jpg',
+    src: 'cakes/blue-bear-cake.jpg',
     label: 'Торт з написами',
     type: 'Святкові',
   },
   {
-    src: '/cakes/social-theme-cake.jpg',
-    label: 'Торт у соцмережевій темі',
+    src: 'cakes/photo_7_2026-05-29_17-28-27.jpg',
+    label: 'Деталізований торт ',
     type: 'Дитячі',
   },
 ]
+
+const galleryProducts = gallery.map((item, index) => ({
+  id: `gallery-${index}`,
+  title: item.label,
+  categories: [item.type],
+  image: item.src,
+  alt: item.label,
+  price: priceNote,
+  weight: 'від 2 кг',
+  description: 'Торт з галереї наших робіт. Деталі декору та написи узгоджуються індивідуально.',
+  tags: ['галерея'],
+}))
+
+
+const allProducts = [...products, ...galleryProducts]
 
 const fillings = [
   'Банан-полуниця',
@@ -164,7 +179,8 @@ const defaultOrder = {
 }
 
 function getProduct(id) {
-  return products.find((product) => product.id === id) ?? products[0]
+
+  return allProducts.find((product) => product.id === id) ?? allProducts[0]
 }
 
 
@@ -213,9 +229,9 @@ function App() {
       return products
     }
 
-    return products.filter((product) => product.category === activeCategory)
+   
+    return products.filter((product) => product.categories.includes(activeCategory))
   }, [activeCategory])
-
   const customTelegramLink = telegramHref(orderMessage(order))
 
   const updateOrder = (field, value) => {
@@ -352,9 +368,9 @@ function App() {
             {filteredProducts.map((product) => (
               <article className="product-card" key={product.id}>
                 <div className="product-image">
-                  <img src={product.image} alt={product.alt} loading="lazy" />
-                  <span>{product.category}</span>
-                </div>
+               <img src={product.image} alt={product.alt} loading="lazy" />
+              <span>{product.categories.join(' / ')}</span>
+              </div>
                 <div className="product-body">
                   <div className="product-title-row">
                     <h3>{product.title}</h3>
@@ -418,7 +434,7 @@ function App() {
           <div className="filling-layout">
             <div className="filling-photo">
               <img
-                src="/cakes/green-berry-slice.jpg"
+                src="cakes/green-berry-slice.jpg"
                 alt="Розріз торта з ягідним шаром та кремом"
                 loading="lazy"
               />
@@ -471,11 +487,20 @@ function App() {
                 value={order.productId}
                 onChange={(event) => updateOrder('productId', event.target.value)}
               >
-                {products.map((product) => (
-                  <option key={product.id} value={product.id}>
-                    {product.title}
-                  </option>
-                ))}
+                <optgroup label="Готові напрямки">
+                  {products.map((product) => (
+                    <option key={product.id} value={product.id}>
+                      {product.title}
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="З галереї робіт">
+                  {galleryProducts.map((product) => (
+                    <option key={product.id} value={product.id}>
+                      {product.title}
+                    </option>
+                  ))}
+                </optgroup>
               </select>
             </label>
 
@@ -593,7 +618,7 @@ function App() {
         <section className="section trust-section">
           <div className="trust-copy">
             <span className="eyebrow">Довіра</span>
-            <h2>Сертифікати та відкриті розрізи</h2>
+            <h2>Сертифікати, інформація та відкриті розрізи</h2>
             <p>
               Для нового бізнесу важливо одразу показати не тільки красу, а й
               рівень підготовки. Тому на сайті є навчання, реальні фото начинок
@@ -603,18 +628,26 @@ function App() {
               <li>Сертифікати з бісквітних тортів і смаку банан-полуниця.</li>
               <li>Фото розрізів, щоб клієнт бачив шари, крем і ягоди.</li>
               <li>Окремий блок для алергій, написів і персонального декору.</li>
+              <li> Дизайн тортів, який не вимагає пояснень і виглядає святково без зайвого декору.</li>
+              <li>Чіткі умови замовлення з базовою ціною від 1000 грн/кг і мінімальним замовленням від 2 кг.</li>
+              <li>Готові шаблони повідомлень для Telegram, які клієнт може використовувати для швидкого замовлення.</li>
             </ul>
           </div>
 
           <div className="trust-media">
             <img
-              src="/cakes/certificate-biscuit-cakes.jpg"
+              src="cakes/lavender-birthday.jpg"
               alt="Сертифікат курсу бісквітні торти"
               loading="lazy"
             />
             <img
-              src="/cakes/certificate-banana-strawberry.jpg"
+              src="cakes/photo_2_2026-05-29_17-28-27.jpg"
               alt="Сертифікат курсу банан-полуниця"
+              loading="lazy"
+            />
+            <img
+              src="cakes/photo_1_2026-05-29_17-29-21.jpg"
+              alt="Інформаці"
               loading="lazy"
             />
           </div>
