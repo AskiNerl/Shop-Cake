@@ -42,18 +42,16 @@
 }
 
 .brand-mark {
-  display: inline-grid;
-  flex: 0 0 42px;
-  width: 42px;
-  height: 42px;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--berry); 
+  color: white;
   border-radius: 50%;
-  color: #ffffff;
-  background: var(--berry);
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .brand strong,
